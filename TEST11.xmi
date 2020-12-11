@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<XMI verified="false" xmlns:UML="http://schema.omg.org/spec/UML/1.3" timestamp="2020-12-11T12:36:11" xmi.version="1.2">
+<XMI verified="false" xmlns:UML="http://schema.omg.org/spec/UML/1.3" timestamp="2020-12-11T13:20:10" xmi.version="1.2">
  <XMI.header>
   <XMI.documentation>
    <XMI.exporter>umbrello uml modeller http://umbrello.kde.org</XMI.exporter>
@@ -82,18 +82,19 @@
       <UML:Generalization discriminator="" isSpecification="false" namespace="Logical View" xmi.id="C5IcmbCGLZrN" visibility="public" parent="HX699pTp7IgD" name="" child="L88bYKN8wzB6"/>
       <UML:Class isAbstract="false" isSpecification="false" isLeaf="false" namespace="Logical View" isRoot="false" xmi.id="NqV30XzABNJi" visibility="public" name="MediaEncode">
        <UML:Classifier.feature>
-        <UML:Operation isAbstract="false" isSpecification="false" isLeaf="false" isRoot="false" isQuery="false" xmi.id="TGOJCai68qSX" visibility="public" name="initVideoCodec">
+        <UML:Operation isAbstract="false" comment="1.找到视频编码&#xa;AVCodec *codec = avcodec_find_encoder((AVCodecID)param.codecId);&#xa;2.视频编码器创建&#xa;AVCodecContext  *m_vCtx = avcodec_alloc_context3(codec);&#xa;3.像素（尺寸）转换上下文创建 rgb->yuv&#xa;m_vSwsCtx = sws_getCachedContext&#xa;4.为AVFrame分配空间&#xa;av_frame_get_buffer(m_yuv, 0);" isSpecification="false" isLeaf="false" isRoot="false" isQuery="false" xmi.id="TGOJCai68qSX" visibility="public" name="initVideoCodec">
          <UML:BehavioralFeature.parameter>
           <UML:Parameter isSpecification="false" type="KOCTsF7wR4WM" value="" xmi.id="P2eqHqJMiw9D" visibility="private" name="rawparam"/>
           <UML:Parameter isSpecification="false" type="KOCTsF7wR4WM" value="" xmi.id="DyhvxMiPb7il" visibility="private" name="encodparam"/>
          </UML:BehavioralFeature.parameter>
         </UML:Operation>
-        <UML:Operation isAbstract="false" isSpecification="false" isLeaf="false" isRoot="false" isQuery="false" xmi.id="fOrmEIJbIvPZ" visibility="public" name="initVideoCodec">
+        <UML:Operation isAbstract="false" comment="1.打开编码器&#xa;avcodec_open2(m_vCtx, m_vCtx->codec, nullptr);&#xa;2.添加视频流到输出上下文&#xa;m_vStream = avformat_new_stream(oc, m_vCtx->codec);&#xa;avcodec_parameters_from_context(m_vStream->codecpar, m_vCtx);" isSpecification="false" isLeaf="false" isRoot="false" isQuery="false" xmi.id="fOrmEIJbIvPZ" visibility="public" name="addVideoStream">
          <UML:BehavioralFeature.parameter>
           <UML:Parameter isSpecification="false" type="kYrvuBbgQJ3e" value="" xmi.id="lgtRd0fozKhu" visibility="private" name="oc"/>
          </UML:BehavioralFeature.parameter>
         </UML:Operation>
-        <UML:Operation isAbstract="false" isSpecification="false" isLeaf="false" isRoot="false" isQuery="false" xmi.id="35LOwDy2N7TR" visibility="public" name="encodeVideo"/>
+        <UML:Operation isAbstract="false" comment="1.rgb->yuv&#xa;sws_scale(m_vSwsCtx, indata, insize, 0, m_vRaw.height, m_yuv->data, m_yuv->linesize);&#xa; 2.转化AVFrame的timebase，开始编码&#xa;m_yuv->pts = av_rescale_q(m_vpts, timebase, m_vCtx->time_base);&#xa;avcodec_send_frame&#xa;3.接收编码后的数据并转换AVPacket的timebase&#xa;avcodec_receive_packet&#xa;av_packet_rescale_ts(packet, m_vCtx->time_base, m_vStream->time_base);  // 转换timebase" isSpecification="false" isLeaf="false" isRoot="false" isQuery="false" xmi.id="35LOwDy2N7TR" visibility="public" name="encodeVideo"/>
+        <UML:Operation isAbstract="false" isSpecification="false" isLeaf="false" isRoot="false" isQuery="false" xmi.id="fSFsKTiALK0W" visibility="public" name="encodeAudio"/>
        </UML:Classifier.feature>
       </UML:Class>
       <UML:Association isSpecification="false" namespace="Logical View" xmi.id="eQJFVz18NquZ" visibility="public" name="">
@@ -112,8 +113,8 @@
          <classwidget linewidth="0" width="91" showpackage="1" textcolor="#000000" height="33" showoperations="1" usesdiagramusefillcolor="0" showopsigs="601" linecolor="#ff0000" localid="anrLWbSjE6kP" usesdiagramfillcolor="0" x="-1113.56" y="-515.635" showscope="1" fillcolor="#ffff00" xmi.id="Zce5CvT1JlEl" font="Sans Serif,9,-1,5,50,0,0,0,0,0" usefillcolor="1" showstereotype="1" showattsigs="601" isinstance="0" showattributes="1" showpubliconly="0"/>
          <classwidget linewidth="0" width="92" showpackage="1" textcolor="#000000" height="33" showoperations="1" usesdiagramusefillcolor="0" showopsigs="601" linecolor="#ff0000" localid="uf7BQJuy6mJc" usesdiagramfillcolor="0" x="-1109.56" y="-397.635" showscope="1" fillcolor="#ffff00" xmi.id="L88bYKN8wzB6" font="Sans Serif,9,-1,5,50,0,0,0,0,0" usefillcolor="1" showstereotype="1" showattsigs="601" isinstance="0" showattributes="1" showpubliconly="0"/>
          <classwidget linewidth="0" width="56" showpackage="1" textcolor="#000000" height="33" showoperations="1" usesdiagramusefillcolor="0" showopsigs="601" linecolor="#ff0000" localid="62CObwKI3sIj" usesdiagramfillcolor="0" x="-1197.58" y="-473.36" showscope="1" fillcolor="#ffff00" xmi.id="HX699pTp7IgD" font="Sans Serif,9,-1,5,50,0,0,0,0,0" usefillcolor="1" showstereotype="1" showattsigs="601" isinstance="0" showattributes="1" showpubliconly="0"/>
-         <classwidget linewidth="0" width="328" showpackage="1" textcolor="#000000" height="76" showoperations="1" usesdiagramusefillcolor="0" showopsigs="601" linecolor="#ff0000" localid="mHhPESl3KRIl" usesdiagramfillcolor="0" x="-1376.47" y="-860.945" showscope="1" fillcolor="#ffff00" xmi.id="NqV30XzABNJi" font="Sans Serif,9,-1,5,50,0,0,0,0,0" usefillcolor="1" showstereotype="1" showattsigs="601" isinstance="0" showattributes="1" showpubliconly="0"/>
-         <classwidget linewidth="0" width="114" showpackage="1" textcolor="#000000" height="50" showoperations="1" usesdiagramusefillcolor="0" showopsigs="601" linecolor="#ff0000" localid="jof3ExpEVWyd" usesdiagramfillcolor="0" x="-843.536" y="-937.414" showscope="1" fillcolor="#ffff00" xmi.id="kYrvuBbgQJ3e" font="Sans Serif,9,-1,5,50,0,0,0,0,0" usefillcolor="1" showstereotype="1" showattsigs="601" isinstance="0" showattributes="1" showpubliconly="0"/>
+         <classwidget linewidth="0" width="328" showpackage="1" textcolor="#000000" height="93" showoperations="1" usesdiagramusefillcolor="0" showopsigs="601" linecolor="#ff0000" localid="mHhPESl3KRIl" usesdiagramfillcolor="0" x="-1319" y="-899.508" showscope="1" fillcolor="#ffff00" xmi.id="NqV30XzABNJi" font="Sans Serif,9,-1,5,50,0,0,0,0,0" usefillcolor="1" showstereotype="1" showattsigs="601" isinstance="0" showattributes="1" showpubliconly="0"/>
+         <classwidget linewidth="0" width="114" showpackage="1" textcolor="#000000" height="50" showoperations="1" usesdiagramusefillcolor="0" showopsigs="601" linecolor="#ff0000" localid="jof3ExpEVWyd" usesdiagramfillcolor="0" x="-882.1" y="-858.018" showscope="1" fillcolor="#ffff00" xmi.id="kYrvuBbgQJ3e" font="Sans Serif,9,-1,5,50,0,0,0,0,0" usefillcolor="1" showstereotype="1" showattsigs="601" isinstance="0" showattributes="1" showpubliconly="0"/>
         </widgets>
         <messages/>
         <associations>
@@ -160,21 +161,21 @@
          <assocwidget linewidth="0" textcolor="#000000" seqnum="" usesdiagramusefillcolor="0" totalcounta="2" totalcountb="2" visibilityA="1" visibilityB="1" linecolor="#ff0000" indexa="1" indexb="1" usesdiagramfillcolor="0" widgetbid="kYrvuBbgQJ3e" widgetaid="pOKESoZ8ljk9" fillcolor="#ffff00" changeabilityA="900" changeabilityB="900" xmi.id="2XjkAvjVjFZj" font="Sans Serif,9,-1,5,50,0,0,0,0,0" usefillcolor="1" type="501">
           <linepath layout="Polyline">
            <startpoint startx="-817.09" starty="-725.529"/>
-           <endpoint endx="-817.09" endy="-887.414"/>
+           <endpoint endx="-817.09" endy="-808.018"/>
           </linepath>
-          <floatingtext linewidth="0" width="52" textcolor="none" height="26" usesdiagramusefillcolor="1" posttext="" linecolor="#ff0000" localid="Ri88vhrdEjZ6" usesdiagramfillcolor="1" x="-881.121" y="-851.843" role="710" fillcolor="none" text="m_oc" xmi.id="sAkIRnuBZaCn" font="Noto Sans CJK SC,11,-1,5,50,0,0,0,0,0" usefillcolor="1" showstereotype="1" pretext="-" isinstance="0"/>
+          <floatingtext linewidth="0" width="52" textcolor="none" height="26" usesdiagramusefillcolor="1" posttext="" linecolor="#ff0000" localid="Ri88vhrdEjZ6" usesdiagramfillcolor="1" x="-881.121" y="-788.843" role="710" fillcolor="none" text="m_oc" xmi.id="sAkIRnuBZaCn" font="Noto Sans CJK SC,11,-1,5,50,0,0,0,0,0" usefillcolor="1" showstereotype="1" pretext="-" isinstance="0"/>
          </assocwidget>
          <assocwidget linewidth="0" textcolor="#000000" seqnum="" usesdiagramusefillcolor="0" totalcounta="2" totalcountb="2" visibilityA="1" visibilityB="1" linecolor="#ff0000" indexa="1" indexb="1" usesdiagramfillcolor="0" widgetbid="NqV30XzABNJi" widgetaid="pOKESoZ8ljk9" fillcolor="#ffff00" changeabilityA="900" changeabilityB="900" xmi.id="V1zyXybwek4X" font="Sans Serif,9,-1,5,50,0,0,0,0,0" usefillcolor="1" type="501">
           <linepath layout="Polyline">
            <startpoint startx="-1156.09" starty="-725.529"/>
-           <endpoint endx="-1156.09" endy="-784.945"/>
+           <endpoint endx="-1156.09" endy="-806.508"/>
           </linepath>
           <floatingtext linewidth="0" width="87" textcolor="none" height="26" usesdiagramusefillcolor="1" posttext="" linecolor="#ff0000" localid="PwAbdhhTqRlH" usesdiagramfillcolor="1" x="-1257.71" y="-780.579" role="710" fillcolor="none" text="m_encode" xmi.id="EdQmBdXheXfA" font="Noto Sans CJK SC,11,-1,5,50,0,0,0,0,0" usefillcolor="1" showstereotype="1" pretext="-" isinstance="0"/>
          </assocwidget>
          <assocwidget textcolor="none" widgetaid="NqV30XzABNJi" usefillcolor="1" fillcolor="none" indexa="1" indexb="1" usesdiagramusefillcolor="0" totalcounta="2" totalcountb="2" linecolor="#ff0000" type="501" linewidth="0" usesdiagramfillcolor="63" widgetbid="kYrvuBbgQJ3e" font="Sans Serif,9,-1,5,50,0,0,0,0,0" seqnum="" xmi.id="eQJFVz18NquZ">
           <linepath layout="Polyline">
-           <startpoint startx="-1048.47" starty="-860.945"/>
-           <endpoint endx="-843.536" endy="-887.414"/>
+           <startpoint startx="-991.003" starty="-839.115"/>
+           <endpoint endx="-882.1" endy="-839.115"/>
           </linepath>
          </assocwidget>
         </associations>
@@ -198,7 +199,7 @@
   </UML:Model>
  </XMI.content>
  <XMI.extensions xmi.extender="umbrello">
-  <docsettings uniqueid="35LOwDy2N7TR" viewid="XOY8uEOogmtZ" documentation=""/>
+  <docsettings uniqueid="07PNErprH2kb" viewid="XOY8uEOogmtZ" documentation=""/>
   <listview>
    <listitem id="Views" open="1" type="800">
     <listitem id="Component View" open="1" type="821"/>
@@ -224,8 +225,9 @@
      </listitem>
      <listitem id="vSxxommS3hA6" open="1" type="813"/>
      <listitem id="NqV30XzABNJi" open="1" type="813">
-      <listitem id="35LOwDy2N7TR" open="0" type="815"/>
       <listitem id="fOrmEIJbIvPZ" open="0" type="815"/>
+      <listitem id="fSFsKTiALK0W" open="0" type="815"/>
+      <listitem id="35LOwDy2N7TR" open="0" type="815"/>
       <listitem id="TGOJCai68qSX" open="0" type="815"/>
      </listitem>
      <listitem id="pOKESoZ8ljk9" open="1" type="813">
